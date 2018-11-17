@@ -1,0 +1,42 @@
+{%extends "header.html"%}
+
+{%block body%}
+<h2>{{ debug }}</h2>
+<h1>Teams</h1>
+<form action="{{ url_for('teams') }}" method="POST">
+  <div class="form-row" >
+    
+    <div class="form-group col-md-4">
+    <label for="tmID">tmID</label>
+    <input type="text" class="form-control" name="tmID" placeholder="ALB">
+    </div>
+    
+    <div class="form-group col-md-4">
+   <label for="lgID">IgID</label>
+    <select class="form-control form-control-sm" name="lgID">
+      <option>WHA</option>
+      <option>NHL</option>
+    </select>
+   </div>
+  
+  </div>
+  <input type="submit" value="Submit">
+
+</form>
+<table class="table table-striped table-responsive">
+<thead class="thead-light">
+<tr class="table-dark">
+    <td scope="col">year</td><td scope="col">lgID</td><td scope="col">tmID</td><td scope="col">oppoID</td><td scope="col">Wins</td><td scope="col">Losses</td><td scope="col">Ties</td>
+</tr>
+</thead>
+<tbody>
+{% for row in rv%}
+    <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock%}

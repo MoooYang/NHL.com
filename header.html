@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+ <head>
+ 
+ <meta charset="utf-8">
+ <title>CS542 Final Project</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+ <link rel="shortcut icon "  href="{{ url_for('static',filename='nhl_icon.png') }}">
+ </head>
+
+<header>
+ <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+    <img src="{{ url_for('static',filename='images/nhl_icon.png') }}" width="30" height="30" class="d-inline-block align-top" alt="">
+	</a>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/teams">Teams</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/players">Players</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/coaches">Coaches</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/leaders">Leaders</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-md-0">
+          <input class="form-control" type="text" placeholder="Search">
+        </form>
+      </div>
+    </nav>
+</header>
+
+<body>
+   <div class="container" align="center" style="min-height: 100%">
+    {% block body%} {% endblock %}
+
+   </div> 
+
+</body>
+
+
+
+
+
+
+
+</html>
+
