@@ -24,26 +24,43 @@ def teams():
         if request.method=='POST':
             lgID=request.form['lgID']
             tmID=request.form['tmID']
-            select_stm = "SELECT * FROM Games WHERE year =%s"
-            data=[1972]
-            if lgID:
-                select_stm=select_stm + ' and lgID=%s'
+            year=request.form['year']
+            select_stm = "SELECT * FROM Games WHERE "
+            data=[]
+            if lgID!='':
+                select_stm=select_stm + 'lgID=%s'
                 data.append(lgID)
             if tmID:
                 select_stm = select_stm + ' and tmID=%s'
                 data.append(tmID)
+            if year:
+                select_stm = select_stm + ' and year=%s'
+                data.append(year)
+            debug=select_stm
+            cur = mysql.connection.cursor()
+            data = tuple(data)
+            cur.execute(select_stm,data)
+            rv = cur.fetchall()
+            cur1 = mysql.connection.cursor()
+            cur1.execute('''select distinct year from Games order by year''')
+            years=cur1.fetchall()
+            years=[items[0] for items in years]
+            return render_template("teams.html", rv=rv, years=years, year=int(year), lgID=lgID, tmID=tmID)
+
         else:
-            select_stm = "SELECT * FROM Games WHERE year =%s"
-            data=[1972]
-        debug=select_stm
-	cur = mysql.connection.cursor()
-        data = tuple(data)
-        cur.execute(select_stm,data)
-        rv = cur.fetchall()
+            select_stm = "SELECT * FROM Games WHERE year =1972"
+            cur = mysql.connection.cursor()
+            cur.execute(select_stm)
+            rv = cur.fetchall()
+            cur1 = mysql.connection.cursor()
+            cur1.execute('''select distinct year from Games order by year''')
+            years=cur1.fetchall()
+            years=[year[0] for year in years]
+            return render_template("teams.html", rv=rv, years=years, year=1972, lgID='NHL', tmID='')    
     except Exception as e:
         debug=e
-	rv="fail"
-    return render_template("teams.html", rv=rv, debug=debug)
+        return render_template("teams.html", debug=debug)
+    
 
 
 
