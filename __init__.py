@@ -81,39 +81,39 @@ def players():
             lgID=request.form['lgID']
             tmID=request.form['tmID']
             year=request.form['year']
-            select_stm = "SELECT * FROM Games WHERE "
+            select_stm = "SELECT * FROM player_team WHERE "
             data=[]
             if year:
-                select_stm = select_stm + 'year=%s'
+                select_stm = select_stm + 'Syear=%s'
                 data.append(year)
             if lgID!='ALL':
                 select_stm=select_stm + ' and lgID=%s'
                 data.append(lgID)
             if tmID:
-                select_stm = select_stm + ' and tmID=%s'
-                data.append(tmID)
+                select_stm = select_stm + ' and tname like %s'
+                data.append('%'+tmID+'%')
             
             debug=select_stm
             cur = mysql.connection.cursor()
             data = tuple(data)
             cur.execute(select_stm,data)
-            rv = cur.fetchall()
+            table = cur.fetchall()
             cur1 = mysql.connection.cursor()
             cur1.execute('''select distinct year from Games order by year''')
             years=cur1.fetchall()
             years=[items[0] for items in years]
-            return render_template("players.html", rv=rv, years=years, year=int(year), lgID=lgID, tmID=tmID)
+            return render_template("players.html", debug=debug,table=table, years=years, year=int(year), lgID=lgID, tmID=tmID)
 
         else:
-            select_stm = "SELECT * FROM Games WHERE year =1972"
+            select_stm = "SELECT * FROM player_team WHERE Syear =1972"
             cur = mysql.connection.cursor()
             cur.execute(select_stm)
-            rv = cur.fetchall()
+            table = cur.fetchall()
             cur1 = mysql.connection.cursor()
             cur1.execute('''select distinct year from Games order by year''')
             years=cur1.fetchall()
             years=[year[0] for year in years]
-            return render_template("players.html", rv=rv, years=years, year=1972, lgID='NHL', tmID='')    
+            return render_template("players.html", table=table, years=years, year=1972, lgID='NHL', tmID='')    
     except Exception as e:
         debug=e
         return render_template("players.html", debug=debug)
