@@ -29,10 +29,7 @@ def get_dropoff(select_stm):
 
 @app.route("/")
 def homepage():
-    cur = mysql.connection.cursor()
-    cur.execute('''SELECT * FROM Games WHERE year = 1972''')
-    rv = cur.fetchall()
-    return render_template("dashboard.html" ,rv=rv)
+    return render_template("homepage.html" )
 
 @app.route("/dashboard/")
 def dashboard():
@@ -92,7 +89,21 @@ def players():
             if tmID:
                 select_stm = select_stm + ' and tname like %s'
                 data.append('%'+tmID+'%')
-            
+            if weight_from:
+                select_stm = select_stm + ' and weight >= %s'
+                data.append(weight_from)
+            if weight_to:
+                select_stm = select_stm + ' and weight <= %s'
+                data.append(weight_to)
+            if height_from:
+                select_stm = select_stm + ' and height >= %s'
+                data.append(height_from)
+            if height_to:
+                select_stm = select_stm + ' and height <= %s'
+                data.append(height_to)
+
+
+
             debug=select_stm
             cur = mysql.connection.cursor()
             data = tuple(data)
