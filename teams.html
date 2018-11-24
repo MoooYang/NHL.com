@@ -4,6 +4,12 @@
 <h2>{{ debug }}</h2>
 <h1>Teams</h1>
 <form action="{{ url_for('teams') }}" method="POST">
+  
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
+    <label class="custom-control-label" for="defaultUnchecked">Search by Game</label>
+</div>
+  
   <div class="form-row" >
     
     <div class="form-group col-md-4">
