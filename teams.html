@@ -1,9 +1,45 @@
 {%extends "header.html"%}
+{%block head%}
+<script type="text/javascript">
+ var slider = new Slider("#ex1");
+slider.on("slide", function(sliderValue) {
+	document.getElementById("ex1SliderVal").textContent = sliderValue;
+});
+
+ var slider = new Slider("#ex2");
+slider.on("slide", function(sliderValue) {
+	document.getElementById("ex2SliderVal").textContent = sliderValue;
+});
+
+ var slider = new Slider("#ex3");
+slider.on("slide", function(sliderValue) {
+	document.getElementById("ex3SliderVal").textContent = sliderValue;
+});
+    </script>
+{%endblock%}
 
 {%block body%}
 <h2>{{ debug }}</h2>
 <h1>Teams</h1>
+
 <form action="{{ url_for('teams') }}" method="POST">
+  
+  <section id="win-loss-tie" class="container">
+<div class="d-flex justify-content-center my-4">
+<input id="ex1" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
+<span id="ex1CurrentSliderValLabel"> Current Wins Value: <span id="ex1SliderVal">0</span></span>
+</div>
+    
+    <div class="d-flex justify-content-center my-4">
+<input id="ex2" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
+<span id="ex2CurrentSliderValLabel">Current Losses Value: <span id="ex2SliderVal">0</span></span>
+</div>
+
+<div class="d-flex justify-content-center my-4"> 
+<input id="ex3" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
+<span id="ex3CurrentSliderValLabel">Current Ties Value: <span id="ex3SliderVal">0</span></span>
+</div>
+    </section>
   
   <div class="custom-control custom-checkbox">
     <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
@@ -41,26 +77,7 @@
    </div>
   </div>
  
-  <section id="win-loss-tie" class="container">
-<div class="d-flex justify-content-center my-4">
-   <span class="font-weight-bold indigo text mr-3 mt-1">Wins</span>
-    <span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
-            <input class="border-0" type="range" min="0" max="30">  
-    <span class="font-weight-bold indigo-text ml-2 mt-1">30</span>
-</div>
-    <div class="d-flex justify-content-center my-4">
-   <span class="font-weight-bold indigo text mr-3 mt-1">Losses</span>
-    <span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
-            <input class="border-0" type="range" min="0" max="30">  
-    <span class="font-weight-bold indigo-text ml-2 mt-1">30</span>
-</div>
-    <div class="d-flex justify-content-center my-4">
-   <span class="font-weight-bold indigo text mr-3 mt-1">Ties</span>
-    <span class="font-weight-bold indigo-text mr-2 mt-1">0</span>
-            <input class="border-0" type="range" min="0" max="30">  
-    <span class="font-weight-bold indigo-text ml-2 mt-1">30</span>
-</div>
-    </section>
+
   
   <input type="submit" value="Submit">
 
