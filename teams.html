@@ -16,6 +16,14 @@ slider.on("slide", function(sliderValue) {
 	document.getElementById("ex3SliderVal").textContent = sliderValue;
 });
     </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $("#show").click(function(){
+        $("#hidden").toggle();
+    });
+});
+</script>
 {%endblock%}
 
 {%block body%}
@@ -39,11 +47,25 @@ slider.on("slide", function(sliderValue) {
 <input id="ex3" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
 <span id="ex3CurrentSliderValLabel">Current Ties Value: <span id="ex3SliderVal">0</span></span>
 </div>
+	    <div class="form-group col-md-2">
+   <label for="lgID">Year</label>
+    <select class="form-control form-control-sm" name="year" >
+      <option></option>
+      {% for year1 in years %}
+      {% if year1 == year %}
+      <option selected="selected">{{ year1 }}</option>
+      {%else%}
+       <option >{{ year1 }}</option>
+      {%endif%}
+      {%endfor%}
+    </select>
+   </div>
+	  
     </section>
   
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-    <label class="custom-control-label" for="defaultUnchecked">Search by Game</label>
+ <div class="custom-control custom-checkbox">
+    <input type="checkbox" class="custom-control-input" id="show" value="no">
+    <label class="custom-control-label" for="show">Search by Game</label>
 </div>
   
   <div class="form-row" >
@@ -62,21 +84,24 @@ slider.on("slide", function(sliderValue) {
     </select>
    </div>
 
-   <div class="form-group col-md-2">
-   <label for="lgID">Year</label>
-    <select class="form-control form-control-sm" name="year" >
-      <option></option>
-      {% for year1 in years %}
-      {% if year1 == year %}
-      <option selected="selected">{{ year1 }}</option>
-      {%else%}
-       <option >{{ year1 }}</option>
-      {%endif%}
-      {%endfor%}
-    </select>
-   </div>
+
   </div>
- 
+	
+	
+	<section class="container" id="hidden">
+    
+     <div class="form-group col-md-2" id="hidden">
+   <label for="lgID">TeamID</label>
+    <select class="form-control form-control-sm" name="TeamID"> 
+    </select>
+        </div>
+    
+       <div class="form-group col-md-2" id="hidden">
+   <label for="lgID">OpponentID</label>
+    <select class="form-control form-control-sm" name="OpponentID"> 
+    </select>
+        </div>
+        </section>
 
   
   <input type="submit" value="Submit">
