@@ -64,7 +64,7 @@ $(document).ready(function(){
     </section>
   
  <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input" id="show" value="no">
+    <input type="checkbox" class="custom-control-input collapsed" id="show" value="no" data-toggle="collapse" data-target="#hidden" aria-expanded="false">
     <label class="custom-control-label" for="show">Search by Game</label>
 </div>
   
@@ -88,15 +88,15 @@ $(document).ready(function(){
   </div>
 	
 	
-	<section class="container" id="hidden">
+	<section class="container collapse" id="hidden" style="display: block;">
     
-     <div class="form-group col-md-2" id="hidden">
+     <div class="form-group col-md-2 collapse" id="hidden" style="">
    <label for="lgID">TeamID</label>
     <select class="form-control form-control-sm" name="TeamID"> 
     </select>
         </div>
     
-       <div class="form-group col-md-2" id="hidden">
+       <div class="form-group col-md-2 collapse" id="hidden" style="">
    <label for="lgID">OpponentID</label>
     <select class="form-control form-control-sm" name="OpponentID"> 
     </select>
