@@ -1,106 +1,132 @@
 {%extends "header.html"%}
-{%block head%}
-<script type="text/javascript">
- var slider = new Slider("#ex1");
-slider.on("slide", function(sliderValue) {
-	document.getElementById("ex1SliderVal").textContent = sliderValue;
-});
-
- var slider = new Slider("#ex2");
-slider.on("slide", function(sliderValue) {
-	document.getElementById("ex2SliderVal").textContent = sliderValue;
-});
-
- var slider = new Slider("#ex3");
-slider.on("slide", function(sliderValue) {
-	document.getElementById("ex3SliderVal").textContent = sliderValue;
-});
-    </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $("#show").click(function(){
-        $("#win-loss-tie").toggle();
-    });
-});
-</script>
-{%endblock%}
 
 {%block body%}
-<h2>{{ debug }}</h2>
-<h1>Teams</h1>
+
+
+<code>{{ debug }}</code>
+
 
 <form action="{{ url_for('teams') }}" method="POST">
-  
+  <script type="text/javascript">
+        function updateRange1(val) {
+          document.getElementById('rang1').innerHTML=val; 
+        }
+    </script>
+  <script type="text/javascript">
+        function updateRange2(val) {
+          document.getElementById('rang2').innerHTML=val; 
+        }
+    </script>
+  <script type="text/javascript">
+        function updateRange3(val) {
+          document.getElementById('rang3').innerHTML=val; 
+        }
+    </script>
+
+
+     <div class="custom-control custom-checkbox">
+    <input name="show" type="checkbox" class="custom-control-input collapsed" id="show" value="no" data-toggle="collapse" data-target="#hidden" aria-expanded="false">
+    <label class="custom-control-label" for="show">Search by Game</label>
+    </div>
+
+    
+
   <section id="win-loss-tie" class="container">
 <div class="d-flex justify-content-center my-4">
-<input id="ex1" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
-<span id="ex1CurrentSliderValLabel"> Current Wins Value: <span id="ex1SliderVal">0</span></span>
+0<input name='ex1' id="ex1" type="range" value="0" min="0" max="13" onchange="updateRange1(this.value);" >13&nbsp;&nbsp;&nbsp;
+<span id="ex1CurrentSliderValLabel"> Current Wins Value: <span  id="rang1" ></span></span>
 </div>
     
     <div class="d-flex justify-content-center my-4">
-<input id="ex2" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
-<span id="ex2CurrentSliderValLabel">Current Losses Value: <span id="ex2SliderVal">0</span></span>
+0<input  name='ex2' id="ex2" type="range" value="0" min="0" max="13" onchange="updateRange2(this.value);">13&nbsp;&nbsp;&nbsp;
+<span id="ex2CurrentSliderValLabel"> Current Losses Value:<span  id="rang2" ></span> </span>
 </div>
 
 <div class="d-flex justify-content-center my-4"> 
-<input id="ex3" type="range" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="0">
-<span id="ex3CurrentSliderValLabel">Current Ties Value: <span id="ex3SliderVal">0</span></span>
+0<input name='ex3' id="ex3" type="range" value="0" min="0" max="8" onchange="updateRange3(this.value);">8&nbsp;&nbsp;&nbsp;
+<span id="ex3CurrentSliderValLabel"> Current Ties Value:<span  id="rang3" ></span> </span>
 </div>
-	    <div class="form-group col-md-2">
-   <label for="lgID">Year</label>
-    <select class="form-control form-control-sm" name="year" >
-      <option></option>
-      {% for year1 in years %}
-      {% if year1 == year %}
-      <option selected="selected">{{ year1 }}</option>
-      {%else%}
-       <option >{{ year1 }}</option>
-      {%endif%}
-      {%endfor%}
-    </select>
-   </div>
-	  
-    </section>
-  
- <div class="custom-control custom-checkbox">
-    <input type="checkbox" class="custom-control-input collapsed" id="show" value="no" data-toggle="collapse" data-target="#hidden" aria-expanded="false">
-    <label class="custom-control-label" for="show">Search by Game</label>
-</div>
-  
-  <div class="form-row" >
-    
-    <div class="form-group col-md-4">
-    <label for="tmID">tmID</label>
-    <input type="text" class="form-control" name="tmID" placeholder="Search" value="{{ tmID }}">
+
+<div class="form-row" > 
+    <div class="form-group col-md-2">
+    <label for="tmID">Team</label>
+    <select class="form-control form-control-sm" name="tmName1">
+          <option></option>
+          {% for team in teamdrop %}
+          <option>{{ team }}</option>
+          {%endfor%}
+          </select>
     </div>
     
-    <div class="form-group col-md-4">
-   <label for="lgID">IgID</label>
-    <select class="form-control form-control-sm" name="lgID" value="{{ lgID }}">
+    <div class="form-group col-md-2">
+   <label for="lgID">League</label>
+    <select class="form-control form-control-sm" name="lgID" >
       <option>ALL</option>
       <option>WHA</option>
       <option>NHL</option>
     </select>
    </div>
 
+   <div class="form-group col-md-1">
+       <label for="lgID">Year</label>
+        <select class="form-control form-control-sm" name="year1" >
+          <option></option>
+          {% for year1 in years %}
+          {% if year1 == year %}
+          <option selected="selected">{{ year1 }}</option>
+          {%else%}
+           <option >{{ year1 }}</option>
+          {%endif%}
+          {%endfor%}
+        </select>
+       </div>
 
   </div>
-	
-	
-	<section class="container collapse" id="hidden" style="display: block;">
+
+
+
+    </section>
+  
+  
+ 
+  
+  
+  
+  
+  <section class="container collapse" id="hidden" style="display: block;">
     
      <div class="form-group col-md-2 collapse" id="hidden" style="">
-   <label for="lgID">TeamID</label>
-    <select class="form-control form-control-sm" name="TeamID"> 
+   
+   <label for="lgID">Team</label>
+    <select class="form-control form-control-sm" name="tmName">
+          <option ></option>
+          {% for team in teamdrop %}
+          <option >{{ team }}</option>
+          {%endfor%}
     </select>
+     
+    <label for="lgID">Opponent</label>
+    <select class="form-control form-control-sm" name="tmNameP"> 
+          <option ></option>
+          {% for team in teamdrop %}
+          <option >{{ team }}</option>
+          {%endfor%}
+    </select>
+       
+     <label for="lgID">Year</label>
+      <select class="form-control form-control-sm" name="year2" >
+        <option></option>
+        {% for year1 in years %}
+        {% if year1 == year %}
+        <option selected="selected">{{ year1 }}</option>
+        {%else%}
+         <option >{{ year1 }}</option>
+        {%endif%}
+        {%endfor%}
+      </select>   
+
         </div>
     
-       <div class="form-group col-md-2 collapse" id="hidden" style="">
-   <label for="lgID">OpponentID</label>
-    <select class="form-control form-control-sm" name="OpponentID"> 
-    </select>
-        </div>
         </section>
 
   
@@ -110,7 +136,9 @@ $(document).ready(function(){
 <table class="table table-striped table-responsive" style="display: block; max-height: 600px; overflow-y: auto; -ms-overflow-style: -ms-autohiding-scrollbar;">
 <thead class="thead-light">
 <tr class="table-dark">
-    <td scope="col">year</td><td scope="col">lgID</td><td scope="col">tmID</td><td scope="col">oppoID</td><td scope="col">Wins</td><td scope="col">Losses</td><td scope="col">Ties</td>
+    {% for item in title %}
+    <td scope="col">{{ item }}</td>
+    {% endfor %}
 </tr>
 </thead>
 <tbody>
