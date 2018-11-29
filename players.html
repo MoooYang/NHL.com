@@ -4,37 +4,64 @@
 <h2>{{ debug }}</h2>
 <h1>Players</h1>
 <form action="{{ url_for('players') }}" method="POST">
- 
-  <div class="form-row">
-      
-     <div class="form-group col-md-4">
-    <label for="tmID">Player name</label>
-    <input type="text" class="form-control" name="Name" placeholder="John Adams" value="">
-    </div>
-    
-  </div>
-  
- <div class="form-row">
-    <div class="form-group">
-    <p> Weight Value: <span id="Weightvalue" name="Weightvalue"></span></p>
-    <input type="range" class="form-control-range" name="Weight" id="Weight" min="0" max="300" value="">
-  </div>
-        <div class="form-group">
-    <p>Height Value: <span id="Heightvalue" name="Heightvalue"></span></p>
-    <input type="range" class="form-control-range" name="Height" id="Height" min="0" max="90" value="">
-  </div>
-        
-   
-   
-    
-    </div>
-  
-  
+    <script type="text/javascript">
+        function updateWeight(val) {
+          document.getElementById('weightspan').innerHTML=val; 
+        }
+    </script>
+    <script type="text/javascript">
+        function updateHeight(val) {
+          document.getElementById('heightspan').innerHTML=val; 
+        }
+    </script>
+    <script type="text/javascript">
+        function updateAge(val) {
+          document.getElementById('agespan').innerHTML=val; 
+        }
+    </script>
+
+    <script type="text/javascript">
+        function updateAssists(val) {
+          document.getElementById('assistsspan').innerHTML=val; 
+        }
+    </script>
+
+    <script type="text/javascript">
+        function updatePts(val) {
+          document.getElementById('ptsspan').innerHTML=val; 
+        }
+    </script>
+
+    <script type="text/javascript">
+        function updatePim(val) {
+          document.getElementById('pimspan').innerHTML=val; 
+        }
+    </script>
+
+
   <div class="form-row" >
     
-    <div class="form-group col-md-4">
-    <label for="tmID">Team name</label>
-    <input type="text" class="form-control" name="tmID" placeholder="Search" value="{{ tmID }}">
+    <div class="form-group col-md-2">
+    <label for="pname">Player</label>
+    <select class="form-control form-control-sm" name="pname">
+          <option></option>
+          {% for player in pname_drop %}
+          <option>{{ player }}</option>
+          {%endfor%}
+          </select>
+    </div>
+
+
+
+
+    <div class="form-group col-md-2">
+    <label for="tmID">Team</label>
+    <select class="form-control form-control-sm" name="tmID">
+          <option></option>
+          {% for team in teamdrop %}
+          <option>{{ team }}</option>
+          {%endfor%}
+          </select>
     </div>
     
     <div class="form-group col-md-2">
@@ -43,12 +70,16 @@
       <option>ALL</option>
       <option>WHA</option>
       <option>NHL</option>
+      <option>WCHL</option>
+      <option>NHA</option>
+      <option>PCHA</option>
     </select>
    </div>
 
    <div class="form-group col-md-1">
    <label for="lgID">Season</label>
     <select class="form-control form-control-sm" name="year">
+      <option></option>
       {% for year1 in years %}
       {% if year1 == year %}
       <option selected="selected">{{ year1 }}</option>
@@ -56,18 +87,71 @@
        <option >{{ year1 }}</option>
       {%endif%}
       {%endfor%}
-      
     </select>
    </div>
-  
   </div>
+
+  <div class="form-row" >
+        
+        <div class="form-group col-md-2">
+            <input type="range" name="weight" value='125' max='265' min='125' onchange="updateWeight(this.value);"><span id="weightspan"></span>
+        </div> 
+
+        <div class="form-group col-md-2">
+            <input type="range" name="height" value='63' max='81' min='63' onchange="updateHeight(this.value);"><span id="heightspan"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input type="range" name="age" value='51' max='51' min='16' onchange="updateAge(this.value);"><span id="agespan"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input type="range" name="assists" value='0' max='163' min='0' onchange="updateAssists(this.value);"><span id="assistsspan"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input type="range" name="pts" value='0' max='215' min='0' onchange="updatePts(this.value);"><span id="ptsspan"></span>
+        </div>
+
+        <div class="form-group col-md-2">
+            <input type="range" name="pim" value='0' max='472' min='0' onchange="updatePim(this.value);"><span id="pimspan"></span>
+        </div>
+
+  </div>
+
+
+  <div class="form-row" >
+    
+    <div class="form-group col-md-2">
+      <select class="form-control form-control-sm" name="position">
+        <option></option>
+        <option>D</option>
+        <option>L</option>
+        <option>R</option>
+        <option>C</option>
+        <option>G</option>
+
+      </select>
+    </div>
+
+    
+    <div class="form-group col-md-2">
+      <select class="form-control form-control-sm" name="catch">
+      <option></option>
+      <option>L</option>
+      <option>R</option>
+      </select>
+    </div>
+  </div>
+
   <input type="submit" value="Submit">
 
 </form>
-<table class="table table-striped table-responsive" style="display: block; max-height: 600px; overflow-y: auto; -ms-overflow-style: -ms-autohiding-scrollbar;">
+
+<table class="table table-striped table-sm table-responsive header-fixed" style="display: block; max-height: 600px; overflow-y: auto; -ms-overflow-style: -ms-autohiding-scrollbar;">
 <thead class="thead-light">
 <tr class="table-dark">
-    <td scope="col">Name</td><td scope="col">League</td><td scope="col">Team</td><td scope="col">Season</td><td scope="col">Height</td><td scope="col">Weight</td><td scope="col">Shoot Catch</td><td scope="col">Postion</td><td scope="col">Birth Year</td>
+    <td scope="col">Name</td><td scope="col">League</td><td scope="col">Team</td><td scope="col">Season</td><td scope="col">Height</td><td scope="col">Weight</td><td scope="col">Shoot Catch</td><td scope="col">Postion</td><td scope="col">Age by Season</td><td scope="col">Games Played</td><td scope="col">Assists</td><td scope="col">Pts</td><td scope="col">PIM</td><td scope="col">PostGP</td><td scope="col">PostA</td><td scope="col">PostPts</td><td scope="col">PostPIM</td>
 </tr>
 </thead>
 <tbody>
