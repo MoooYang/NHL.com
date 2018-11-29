@@ -24,6 +24,13 @@ def get_dropoff(select_stm):
     drop=[items[0] for items in results]
     return drop
 
+def rep_with_value(string, value):
+    n = len(value)
+    new_string = string
+    for i in range(n):    
+        rep = value[i]
+        new_string = new_string.replace('%s',rep, 1)
+    return new_string
 
 
 
@@ -39,31 +46,73 @@ def dashboard():
 def teams():
     try:
         if request.method=='POST':
-            lgID=request.form['lgID']
-            tmID=request.form['tmID']
-            year=request.form['year']
-            select_stm = "SELECT * FROM Games WHERE "
-            data=[]
-            if year:
-                select_stm = select_stm + 'year=%s'
-                data.append(year)
-            if lgID!='ALL':
-                select_stm=select_stm + ' and lgID=%s'
-                data.append(lgID)
-            if tmID:
-                select_stm = select_stm + ' and tmID=%s'
-                data.append(tmID)
-            
-            debug=select_stm
-            table=get_table(select_stm, data)
+            try:
+                show= request.form['show']
+            except:
+                show = 'false'
+            if show =='false':
+                lgID=request.form['lgID']
+                tmName1=request.form['tmName1']
+                year=request.form['year1']
+                ex1 =request.form['ex1']
+                ex2 =request.form['ex2']
+                ex3 =request.form['ex3']
+                select_stm = "select name, year, lgId, tmID, rank, G, W, L, T ,Pts, GF, GA from Team where "
+                where=''
+                data=[]
+                if year:
+                    where = where + 'and year=%s '
+                    data.append(year)
+                if lgID!='ALL':
+                    where=where + 'and lgID=%s '
+                    data.append(lgID)
+                if tmName1:
+                    where = where + 'and name like %s '
+                    data.append('%'+ tmName1 +'%')
+                if int(ex1):
+                    where = where + 'and W > %s '
+                    data.append(ex1)
+                if int(ex2):
+                    where = where + 'and L > %s '
+                    data.append(ex2)
+                if int(ex3):
+                    where = where + 'and T > %s '
+                    data.append(ex3)
+                title =['Team','Year','League','TeamID','Rank','Games','Wins','Losses','Ties','Pts','GF','GA']
+            else:
+                tmName=request.form['tmName']
+                tmNameP=request.form['tmNameP']
+                year=request.form['year2']
+                select_stm = "select * from team_game where "
+                where=''
+                data=[]
+                if year:
+                    where = where + 'and year=%s '
+                    data.append(year)
+                if tmName:
+                    where = where + 'and name like %s '
+                    data.append('%'+tmName+'%')
+                if tmNameP:
+                    where = where + 'and pname like %s '
+                    data.append('%'+tmNameP+'%')
+                title = ['Year','Home','Away','Wins','Losses','Ties']
+            where=where[3:]
+            debug= select_stm+rep_with_value(where,data)
+            table=get_table(select_stm+where, data)
+            teamdrop=get_dropoff('select distinct name from Team')
             years=get_dropoff('select distinct year from Games order by year')
-            return render_template("teams.html", table=table, years=years, year=int(year), lgID=lgID, tmID=tmID)
+            try:
+                year=int(year)
+            except:
+                year=''
+            return render_template("teams.html", table=table, years=years, debug=debug, year=year,teamdrop=teamdrop,title=title)
 
         else:
-            select_stm = "SELECT * FROM Games WHERE year =1972"
+            select_stm = "SELECT * FROM Games WHERE year =2008"
             table=get_table(select_stm)
+            teamdrop=get_dropoff('select distinct name from Team')
             years=get_dropoff('select distinct year from Games order by year')
-            return render_template("teams.html", table=table, years=years, year=1972, lgID='NHL', tmID='')    
+            return render_template("teams.html", table=table, years=years, year=2008, lgID='NHL', tmID='',teamdrop=teamdrop)    
     except Exception as e:
         debug=e
         return render_template("teams.html", debug=debug)
