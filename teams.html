@@ -31,23 +31,7 @@
 
     
 
-  <section id="win-loss-tie" class="container">
-<div class="d-flex justify-content-center my-4">
-0<input name='ex1' id="ex1" type="range" value="0" min="0" max="13" onchange="updateRange1(this.value);" >13&nbsp;&nbsp;&nbsp;
-<span id="ex1CurrentSliderValLabel"> Current Wins Value: <span  id="rang1" ></span></span>
-</div>
-    
-    <div class="d-flex justify-content-center my-4">
-0<input  name='ex2' id="ex2" type="range" value="0" min="0" max="13" onchange="updateRange2(this.value);">13&nbsp;&nbsp;&nbsp;
-<span id="ex2CurrentSliderValLabel"> Current Losses Value:<span  id="rang2" ></span> </span>
-</div>
-
-<div class="d-flex justify-content-center my-4"> 
-0<input name='ex3' id="ex3" type="range" value="0" min="0" max="8" onchange="updateRange3(this.value);">8&nbsp;&nbsp;&nbsp;
-<span id="ex3CurrentSliderValLabel"> Current Ties Value:<span  id="rang3" ></span> </span>
-</div>
-
-<div class="form-row" > 
+  <section id="win-loss-tie" class="container"><div class="form-row" > 
     <div class="form-group col-md-2">
     <label for="tmID">Team</label>
     <select class="form-control form-control-sm" name="tmName1">
@@ -84,6 +68,23 @@
   </div>
 
 
+
+  </div>
+
+<div class="d-flex justify-content-center my-4">
+  <span id="ex1CurrentSliderValLabel"> Wins&nbsp;≥&nbsp; <span  id="rang1" ></span><span>&nbsp;</span><span>&nbsp;</span></span>
+  0<input name='ex1' id="ex1" type="range" value="0" min="0" max="13" onchange="updateRange1(this.value);" >13&nbsp;&nbsp;&nbsp;
+</div>
+    
+<div class="d-flex justify-content-center my-4">
+  <span id="ex2CurrentSliderValLabel"> Loses ≥&nbsp;<span  id="rang2" ></span><span>&nbsp;</span><span>&nbsp;</span> </span>
+  0<input  name='ex2' id="ex2" type="range" value="0" min="0" max="13" onchange="updateRange2(this.value);">13&nbsp;&nbsp;&nbsp;
+</div>
+
+<div class="d-flex justify-content-center my-4"> 
+  <span id="ex3CurrentSliderValLabel"> Ties&nbsp;≥&nbsp;<span  id="rang3" ></span><span>&nbsp;</span><span>&nbsp;</span> </span>
+  0<input name='ex3' id="ex3" type="range" value="0" min="0" max="8" onchange="updateRange3(this.value);">8&nbsp;&nbsp;&nbsp;
+</div>
 
     </section>
   
