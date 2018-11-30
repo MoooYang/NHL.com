@@ -1,8 +1,8 @@
 {%extends "header.html"%}
 
 {%block body%}
-<h2>{{ debug }}</h2>
-<h1>Players</h1>
+<code>{{ debug }}</code>
+
 <form action="{{ url_for('players') }}" method="POST">
     <script type="text/javascript">
         function updateWeight(val) {
@@ -64,7 +64,7 @@
           </select>
     </div>
     
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-1">
    <label for="lgID">League</label>
     <select class="form-control form-control-sm" name="lgID" value="{{ lgID }}">
       <option>ALL</option>
@@ -89,40 +89,10 @@
       {%endfor%}
     </select>
    </div>
-  </div>
 
-  <div class="form-row" >
-        
-        <div class="form-group col-md-2">
-            <input type="range" name="weight" value='125' max='265' min='125' onchange="updateWeight(this.value);"><span id="weightspan"></span>
-        </div> 
-
-        <div class="form-group col-md-2">
-            <input type="range" name="height" value='63' max='81' min='63' onchange="updateHeight(this.value);"><span id="heightspan"></span>
-        </div>
-
-        <div class="form-group col-md-2">
-            <input type="range" name="age" value='51' max='51' min='16' onchange="updateAge(this.value);"><span id="agespan"></span>
-        </div>
-
-        <div class="form-group col-md-2">
-            <input type="range" name="assists" value='0' max='163' min='0' onchange="updateAssists(this.value);"><span id="assistsspan"></span>
-        </div>
-
-        <div class="form-group col-md-2">
-            <input type="range" name="pts" value='0' max='215' min='0' onchange="updatePts(this.value);"><span id="ptsspan"></span>
-        </div>
-
-        <div class="form-group col-md-2">
-            <input type="range" name="pim" value='0' max='472' min='0' onchange="updatePim(this.value);"><span id="pimspan"></span>
-        </div>
-
-  </div>
-
-
-  <div class="form-row" >
     
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-1">
+      <label for="position">Position</label>
       <select class="form-control form-control-sm" name="position">
         <option></option>
         <option>D</option>
@@ -135,14 +105,53 @@
     </div>
 
     
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-1">
+      <label for="catch">Catch</label>
       <select class="form-control form-control-sm" name="catch">
       <option></option>
       <option>L</option>
       <option>R</option>
       </select>
     </div>
+
+
+
   </div>
+
+  <div class="form-row" >
+        
+        
+        <div class="form-group col-md-3">
+
+            125<input type="range" name="weight" value='125' max='265' min='125' onchange="updateWeight(this.value);">265&nbsp;&nbsp;&nbsp;<label for="weight">Weight >= <span id="weightspan"></span></label>
+        </div> 
+
+        <div class="form-group col-md-3">
+            63&nbsp;<input type="range" name="height" value='63' max='81' min='63' onchange="updateHeight(this.value);">&nbsp;81&nbsp;&nbsp;&nbsp;<label for="height">Height >= <span id="heightspan"></span></label>
+        </div>
+
+        <div class="form-group col-md-3">
+            16&nbsp;<input type="range" name="age" value='51' max='51' min='16' onchange="updateAge(this.value);">&nbsp;51&nbsp;&nbsp;&nbsp;<label for="age">Age <= <span id="agespan"></span></label>
+  </div>
+
+
+  <div class="form-row" >
+        <div class="form-group col-md-2.5">
+            0&nbsp;&nbsp;<input type="range" name="assists" value='0' max='163' min='0' onchange="updateAssists(this.value);">163<span id="assistsspan"></span>
+        </div>
+
+        <div class="form-group col-md-2.5">
+            0&nbsp;&nbsp;<input type="range" name="pts" value='0' max='215' min='0' onchange="updatePts(this.value);">215<span id="ptsspan"></span>
+        </div>
+
+        <div class="form-group col-md-2.5">
+            0&nbsp;&nbsp;<input type="range" name="pim" value='0' max='472' min='0' onchange="updatePim(this.value);">472<span id="pimspan"></span>
+        </div>
+
+  </div>
+
+
+  
 
   <input type="submit" value="Submit">
 
