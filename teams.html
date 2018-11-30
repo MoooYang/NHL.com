@@ -44,7 +44,8 @@
         }
     </script>
 
-
+<br />
+<br />
      
     <input name="show" type="checkbox"  onclick="showornot();">
     <label for="show">Search by Game</label>
@@ -52,23 +53,30 @@
 
     
 
-  <div id="showAndDisplay1"  style="">
-
-    <div class="form-group col-md-2">
-    
-          <div class="form-inline row">
-          <label for="tmID">Team &nbsp;&nbsp;&nbsp;&nbsp;</label>
-          <select class="form-control form-control-sm" name="tmName1" style="width:110px">
+   <div id="showAndDisplay1"  style="">
+    <div class="row">
+      <div class="column">
+      <div class="form-group col-md-6">
+<br />
+<br />
+        <div class="row">
+          <div class="col-25">
+            <label for="tmID">Team &nbsp;&nbsp;&nbsp;&nbsp;</label>
+           </div>
+           <div class="col-75">
+            <select class="form-control form-control-sm" name="tmName1" style="width:110px">
                 <option></option>
                 {% for team in teamdrop %}
                 <option>{{ team }}</option>
                 {%endfor%}
                 </select>
-            </div>
-
-
-           <div class="form-inline row">
+             </div>
+          </div>
+         <div class="row">
+          <div class="col-25">
            <label for="lgID">League &nbsp;</label>
+            </div>
+           <div class="col-75">
             <select class="form-control form-control-sm" name="lgID" style="width:110px">
               <option>ALL</option>
               <option>WHA</option>
@@ -78,10 +86,12 @@
               <option>PCHA</option>
             </select>
         </div>
-
-
-              <div class="form-inline row">
+                 </div>
+         <div class="row">
+          <div class="col-25">
            <label for="lgID">Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          </div>
+           <div class="col-75">
             <select class="form-control form-control-sm" name="year1" style="width:110px">
               <option></option>
               {% for year1 in years %}
@@ -93,10 +103,11 @@
               {%endfor%}
             </select>
            </div>
+              </div>
       </div>
+</div>
 
-
-
+<div class="column">
           <div class="d-flex justify-content-center my-4">
             <span id="ex1CurrentSliderValLabel"> Wins&nbsp;≥&nbsp; <span  id="rang1" ></span><span>&nbsp;</span><span>&nbsp;</span></span>
             0<input name='ex1' id="ex1" type="range" value="0" min="0" max="13" onchange="updateRange1(this.value);" >13&nbsp;&nbsp;&nbsp;
@@ -111,32 +122,53 @@
             <span id="ex3CurrentSliderValLabel"> Ties&nbsp;≥&nbsp;<span  id="rang3" ></span><span>&nbsp;</span><span>&nbsp;</span> </span>
             0<input name='ex3' id="ex3" type="range" value="0" min="0" max="8" onchange="updateRange3(this.value);">8&nbsp;&nbsp;&nbsp;
           </div>
-    
+ </div>
+      </div>
     </div>
-  
   
  
   
  <div id="showAndDisplay2" style="display: none;">
-   
-   <label for="lgID">Team</label>
+   <div class="row">
+     <div class="column">
+      <div class="form-group col-md-6">
+        <br />
+        <br />
+   <div class="row">
+     <div class="col-25">
+   <label for="lgID">Team &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+       </div>
+     
+    <div class="col-75">
     <select class="form-control form-control-sm" name="tmName" style="width:110px">
           <option ></option>
           {% for team in teamdrop %}
           <option >{{ team }}</option>
           {%endfor%}
     </select>
-     
-    <label for="lgID">Opponent</label>
-    <select class="form-control form-control-sm" name="tmNameP" style="width:110px"> 
+      </div>
+     </div>
+   
+     <div class="row">
+       <div class="col-25">
+          <label for="lgID">Opponent &nbsp;</label>
+         </div>
+       <div class="col-75">
+          <select class="form-control form-control-sm" name="tmNameP" style="width:110px"> 
           <option ></option>
           {% for team in teamdrop %}
           <option >{{ team }}</option>
           {%endfor%}
-    </select>
-       
-     <label for="lgID">Year</label>
-      <select class="form-control form-control-sm" name="year2" style="width:110px">
+          </select>
+        </div>
+       </div>
+   
+       <div class="row">
+       <div class="col-25">
+     <label for="lgID">Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+         </div>
+    <div class="col-75">
+       <select class="form-control form-control-sm" name="year2" style="width:110px">
         <option></option>
         <option>sum</option>>
         {% for year1 in years %}
@@ -147,9 +179,16 @@
         {%endif%}
         {%endfor%}
       </select>   
-
+    </div>
 </div>
-    
+               </div>
+       </div>
+     <div class="column">
+       <br />
+       <br />
+       </div>
+     </div>
+    </div>
         
 
   
