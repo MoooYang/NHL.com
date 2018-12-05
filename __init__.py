@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from flask_mysqldb import MySQL
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = '47.107.75.241'
+app.config['MYSQL_HOST'] = '127.0.0.1'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = 'WPI2018'
 app.config['MYSQL_DB'] = 'HOCKEY'
@@ -117,11 +117,12 @@ def teams():
             return render_template("teams.html", table=table, years=years, debug=debug, year=year,teamdrop=teamdrop,title=title)
 
         else:
-            select_stm = "SELECT * FROM Games WHERE year =1927"
+            title =['Team','Year','League','TeamID','Rank','Games','Wins','Losses','Ties','Pts','GF','GA']
+            select_stm = "select name, year, lgId, tmID, rank, G, W, L, T ,Pts, GF, GA from Team where year=1927"
             table=get_table(select_stm)
             teamdrop=get_dropoff('select distinct name from Team')
             years=get_dropoff('select distinct year from Games order by year')
-            return render_template("teams.html", table=table, years=years, year=1927, lgID='NHL', tmID='',teamdrop=teamdrop)    
+            return render_template("teams.html", table=table, years=years, year='', lgID='NHL', tmID='',teamdrop=teamdrop,title=title)    
     except Exception as e:
         debug=e
         return render_template("teams.html", debug=debug)
@@ -228,12 +229,67 @@ def players():
 
 
 
-@app.route("/coaches/")
+@app.route("/coaches/",methods=['GET', 'POST'])
 def coaches():
     return render_template("coaches.html")
-@app.route("/leaders/")
+
+@app.route("/leaders/",methods=['GET', 'POST'])
 def leaders():
-    return render_template("leaders.html")
+    try:
+        if request.method=='POST':
+            lgID=request.form['lgID']
+            tmID=request.form['tmID']
+            year=request.form['year']
+            where_=''
+            where_2=''
+            where=''
+            whereForteam=''
+            data=[]
+            dataForteam=[]
+            if year:
+                where = where + 'and Syear=%s '
+                whereForteam=whereForteam + 'and year = %s '
+                data.append(year)
+                dataForteam.append(year)
+            if lgID!='ALL':
+                where=where + 'and lgID=%s '
+                whereForteam=whereForteam + 'and lgID= %s '
+                data.append(lgID)
+                dataForteam.append(lgID)
+            if tmID:
+                where = where + 'and tname like %s '
+                data.append('%'+tmID+'%')
+            if where:
+                where_='where'
+            if whereForteam:
+                where_2='where'
+            where=where[3:]
+            whereForteam=whereForteam[3:]
+            table1=get_table('select  pname, Assists from player_team '+where_+ where +' order by Assists DESC limit 10',data)
+            table2=get_table('select  pname, GamesPlayed from player_team '+where_+where+' order by GamesPlayed DESC limit 10',data)
+            table3=get_table('select  pname, Pts from player_team '+where_+where+' order by Pts DESC limit 10',data)
+            table4=get_table('select  pname, Pts/GamesPlayed as pg from player_team '+where_ + where+' order by pg DESC limit 10',data)
+            table5=get_table('select  name, W from Team '+ where_2 +whereForteam +' order by W DESC limit 10',dataForteam)
+            years=get_dropoff('select distinct year from Games order by year')
+            teamdrop=get_dropoff('select distinct name from Team')
+            try:
+                year=int(year)
+            except:
+                year=''
+            return render_template("leaders.html", table1=table1,table2=table2, table3=table3,table4=table4,table5=table5,years=years, year=year, lgID='NHL', tmID='',teamdrop=teamdrop)
+
+        else:
+            table1=get_table('select  pname, Assists from player_team where Syear = %s order by Assists DESC limit 10',[2010])
+            table2=get_table('select  pname, GamesPlayed from player_team where Syear = %s order by GamesPlayed DESC limit 10',[2010])
+            table3=get_table('select  pname, Pts from player_team where Syear = %s order by Pts DESC limit 10',[2010])
+            table4=get_table('select  pname, Assists from player_team where Syear = %s order by Assists DESC limit 10',[2010])
+            table5=get_table('select  pname, Pts/GamesPlayed as pg from player_team where Syear = %s order by pg DESC limit 10',[2010])
+            years=get_dropoff('select distinct year from Games order by year')
+            teamdrop=get_dropoff('select distinct name from Team')
+            return render_template("leaders.html", table1=table1,table2=table2, table3=table3,table4=table4,table5=table5,years=years, year=1927, lgID='NHL', tmID='',teamdrop=teamdrop)    
+    except Exception as e:
+        debug=e
+        return render_template("leaders.html", debug=debug)
    
 if __name__ == "__main__":
     app.run()
