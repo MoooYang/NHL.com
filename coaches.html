@@ -1,0 +1,161 @@
+{%extends "header.html"%}
+
+{%block body%}
+
+
+<code>
+<p class="outset" style="color:white"> {{ debug }} </p>
+</code>
+
+
+<form action="{{ url_for('coaches') }}" method="POST">
+  
+  <script type="text/javascript">
+        function updateRange1(val) {
+          document.getElementById('rang1').innerHTML=val; 
+        }
+    </script>
+  <script type="text/javascript">
+        function updateRange2(val) {
+          document.getElementById('rang2').innerHTML=val; 
+        }
+    </script>
+  <script type="text/javascript">
+        function updateRange3(val) {
+          document.getElementById('rang3').innerHTML=val; 
+        }
+    </script>
+
+  <script type="text/javascript">
+        function showornot() {
+          v1=document.getElementById('showAndDisplay1').style.display
+          if(v1=='none')
+            {v1='block'}
+          else
+            {v1='none'}
+          
+          v2=document.getElementById('showAndDisplay2').style.display
+          
+          if(v2=='none')
+            {v2='block'}
+          else
+            {v2='none'}
+          
+          document.getElementById('showAndDisplay1').style.display=v1
+          document.getElementById('showAndDisplay2').style.display=v2
+        }
+    </script>
+
+<br />
+<br />
+
+
+    <div class="row">
+      <div class="column">
+      <div class="form-group col-md-6">
+          
+
+          
+          <div class="row">
+          <div class="col-25">
+            <label for="tmID">Coach &nbsp;&nbsp;&nbsp;&nbsp;</label>
+           </div>
+           <div class="col-75">
+            <select class="form-control form-control-sm" name="ccname" style="width:110px">
+                <option></option>
+                {% for coach in coachdrop %}
+                <option>{{ coachName }}</option>
+                {%endfor%}
+                </select>
+             </div>
+          </div>
+          
+         <div class="row">
+          <div class="col-25">
+            <label for="tmID">Team &nbsp;&nbsp;&nbsp;&nbsp;</label>
+           </div>
+           <div class="col-75">
+            <select class="form-control form-control-sm" name="tmname" style="width:110px">
+                <option></option>
+                {% for team in teamdrop %}
+                <option>{{ teamname }}</option>
+                {%endfor%}
+                </select>
+             </div>
+          </div>
+          
+         <div class="row">
+          <div class="col-25">
+           <label for="lgID">Games &nbsp;</label>
+            </div>
+           <div class="col-75">
+            <select class="form-control form-control-sm" name="game" style="width:110px">
+                <option></option>
+                {% for game in gamedrop %}
+                <option>{{ game }}</option>
+                {%endfor%}
+                </select>
+        </div>
+                 </div>
+                 
+         <div class="row">
+          <div class="col-25">
+           <label for="lgID">Year &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+          </div>
+           <div class="col-75">
+            <select class="form-control form-control-sm" name="year" style="width:110px">
+              <option></option>
+              {% for year1 in years %}
+              {% if year1 == year %}
+              <option selected="selected">{{ year }}</option>
+              {%else%}
+               <option >{{ year1 }}</option>
+              {%endif%}
+              {%endfor%}
+            </select>
+           </div>
+              </div>
+      </div>
+</div>
+
+<div class="column">
+          <div class="d-flex justify-content-center my-4">
+            <span id="ex1CurrentSliderValLabel"> Wins&nbsp;≥&nbsp; <span  id="rang1" ></span><span>&nbsp;</span><span>&nbsp;</span></span>
+            0<input name='ex1' id="ex1" type="range" value="0" min="0" max="62" onchange="updateRange1(this.value);" >62&nbsp;&nbsp;&nbsp;
+          </div>
+              
+          <div class="d-flex justify-content-center my-4">
+            <span id="ex2CurrentSliderValLabel"> Loses ≥&nbsp;<span  id="rang2" ></span><span>&nbsp;</span><span>&nbsp;</span> </span>
+            0<input  name='ex2' id="ex2" type="range" value="0" min="0" max="71" onchange="updateRange2(this.value);">71&nbsp;&nbsp;&nbsp;
+          </div>
+
+          <div class="d-flex justify-content-center my-4"> 
+            <span id="ex3CurrentSliderValLabel"> Ties&nbsp;≥&nbsp;<span  id="rang3" ></span><span>&nbsp;</span><span>&nbsp;</span> </span>
+            0<input name='ex3' id="ex3" type="range" value="0" min="0" max="24" onchange="updateRange3(this.value);">24&nbsp;&nbsp;&nbsp;
+          </div>
+ </div>
+      </div>
+    </div>
+  
+  <input type="submit" value="Submit">
+
+</form>
+<table class="table table-striped table-responsive" style="display: block; max-height: 600px; overflow-y: auto; -ms-overflow-style: -ms-autohiding-scrollbar;">
+<thead class="thead-light">
+<tr class="table-dark">
+    {% for item in title %}
+    <td scope="col">{{ item }}</td>
+    {% endfor %}
+</tr>
+</thead>
+<tbody>
+{% for row in table%}
+    <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+    </tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock%}
