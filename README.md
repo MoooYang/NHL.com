@@ -1,6 +1,12 @@
 # NHL.com
 NHL.com is the web site of the National Hockey League, which provide users with various way to access NHL games stats.
 
+### Home Page
+![Home Page](./images/HomePage.png)
+
+### Player Pages
+![Game Page](./images/Picture4.png)
+
 ## Overview
 We are aiming to develop a visualized interactive query website “All about Hockey” based on the Hockey database. The Hockey database stores records of players, teams, coaches and their performances during 1909-2011, which is downloaded from the KAGGLE. The basic functionality of the website we achieved is to output the results from the dataset by applying multiple filters. More important, the website can do simple data analysis by revealing top players  of a team evaluated from different fields to help make comparisons.
 
@@ -11,7 +17,11 @@ More up-to-date information and complicated functionalities will be added into t
 ## Background Material
 We use ER diagram and Relational Model to build the database. And designing proper triggers and constraints help us better maintain the database. For the reason that we would like to join several related tables to get overall information about an entity, we use views to help us get rid of long nested queries. Aiming to optimize our queries and make the website much quicker, we also build clustered tree index on the potentially most frequent-retrieved attributes.
 - An entity–relationship model (ER model for short) describes interrelated things of interest in a specific domain of knowledge. A basic ER model is composed of entity types (which classify the things of interest) and specifies relationships that can exist between instances of those entity types.
-- 
+![ER Diagram](./images/Picture1.png)
+
+- The relational model (RM) for database management is an approach to managing data using a structure and language consistent with first-order predicate logic, where all data is represented in terms of tuples, grouped into relations. A database organized in terms of the relational model is a relational database.
+ 
+
 As for developing the website, we apply HTML, Cascading Style Sheets (CSS), JavaScript and Flask to fulfill the functions of query, simple analysis and interactivity.
 The relational model (RM) for database management is an approach to managing data using a structure and language consistent with first-order predicate logic, where all data is represented in terms of tuples, grouped into relations. A database organized in terms of the relational model is a relational database.
 - Cascading Style Sheets allow for flexible formatting of a page. They should be used instead of tables for non-tabular content whenever possible, because they can be manipulated by the reader or overridden by an author if your CSS is embedded in another page via a template.
