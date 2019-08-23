@@ -1,6 +1,8 @@
 # NHL.com
 NHL.com is the web site of the National Hockey League, which provide users with various way to access NHL games stats.
 
+Website Demo: [NHL.com](http://35.229.152.103) 
+
 ### Home Page
 ![Home Page](./images/HomePage.png)
 
@@ -36,7 +38,13 @@ What we have learnt from them are:
 - Fancy and interactive website elements, such as the bar charts comparing players and teams.
 
 What we have improved based on these websites are:
--Additional table and information for coaches. Because we think that the data for coaches is also important for Hockey fans, with which he or she can check the couching history of his or her couches, or the historic couches who couches his or her favourite team;
--We have combined the multiple-aspect performance ranking of players in each team, and users can search for the top players by team name and year;
--The web design is more flexible and colorful compared with the official sports website, with red as the main color chaining the subpages.
+- Additional table and information for coaches. Because we think that the data for coaches is also important for Hockey fans, with which he or she can check the couching history of his or her couches, or the historic couches who couches his or her favourite team;
+- We have combined the multiple-aspect performance ranking of players in each team, and users can search for the top players by team name and year;
+- The web design is more flexible and colorful compared with the official sports website, with red as the main color chaining the subpages.
 
+## Appendix
+### Team Page
+![Team Page](./images/Picture2.png)
+
+### Games Page
+![Game Page](./images/Picture3.png)
